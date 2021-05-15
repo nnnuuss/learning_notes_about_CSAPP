@@ -204,8 +204,42 @@ int negate(int x) {
  *   Max ops: 15
  *   Rating: 3
  */
+int cmp(int x, int y){
+	int cx = (x & 0x80000000);
+	int cy = (y & 0x80000000);
+	if (cx && cy)return 1;
+	else if (cx && !cy)return 2;
+	else if (!cx && cy)return 3;
+	else return 0;
+}
+
 int isAsciiDigit(int x) {
-  return 2;
+	int maxn = 0x39;
+	int minn = 0x30;
+	int temp = x;
+	int maxflag = 0;
+	int minflag = 0;
+	int i = 32;
+	while(i--){
+		int flag = cmp(x, maxn);
+		if (flag == 2 && maxflag == 0)
+			return 0;
+		else if (flag == 3)
+			maxflag = 1;
+		x <<= 1;
+		maxn <<= 1;
+	}
+	i = 32;
+	while(i--){
+		int flag = cmp(temp, minn);
+		if (flag == 3 && minflag == 0)
+			return 0;
+		else if (flag == 2)
+			minflag = 1;
+		temp <<= 1;
+		minn <<= 1;
+	}
+	return 1;
 }
 /* 
  * conditional - same as x ? y : z 
@@ -215,7 +249,10 @@ int isAsciiDigit(int x) {
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
-  return 2;
+  if (x){
+  	return y;
+  }
+  return z;
 }
 /* 
  * isLessOrEqual - if x <= y  then return 1, else return 0 
@@ -225,7 +262,26 @@ int conditional(int x, int y, int z) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-  return 2;
+	int flag = cmp(x, y);
+	if (flag == 2)
+		return 1;
+	else if (flag == 3)
+		return 0;
+	else{
+		x <<= 1;
+		y <<= 1;
+		int i = 31;
+		while(i--){
+			flag = cmp(x, y);
+			if (flag == 2)
+				return 0;
+			else if (flag == 3)
+				return 1;
+			x <<= 1;
+			y <<= 1;
+		}
+	}
+	return 1;
 }
 //4
 /* 
@@ -237,7 +293,13 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-  return 2;
+  while(x){
+  	if (x & 0x80000000){
+		return 0;
+	}
+	x <<= 1;
+  }
+  return 1;
 }
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
@@ -252,7 +314,34 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  return 0;
+	int i = 32;
+	int ans = 1, flag = 0, negativeflag = 0;
+	if (x & 0x80000000){
+		negativeflag = 1;
+	}
+	i--;
+	x <<= 1;
+	if (negativeflag){
+		while(i--){
+			if (x ^ (0x80000000|x))
+				flag = 1;
+			if (x & 0x80000000 && flag == 0)
+				ans--;
+			ans++;
+			x <<= 1;
+		}
+	}else{
+		int num = 32;
+		while(i--){
+			if (x & 0x80000000){
+				ans = num;
+				break;
+			}
+			num--;
+			x <<= 1;
+		}
+	}
+	return ans;
 }
 //float
 /* 
