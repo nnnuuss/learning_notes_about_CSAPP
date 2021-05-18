@@ -356,7 +356,18 @@ int howManyBits(int x) {
  *   Rating: 4
  */
 unsigned floatScale2(unsigned uf) {
-  return 2;
+	unsigned exp = uf & 0x7f800000;
+	unsigned frac = uf & 0x007fffff;
+	if (!exp){	//Non-standardized	
+		if (!frac)return uf;
+		unsigned num = uf & 0x007fffff;
+		num <<= 1;
+		return (uf & 0xff800000) | num;
+	}else if (!(exp ^ 0x7f800000)){		//NaN or MAX
+		return uf;
+	}else{
+		return uf + 0x00800000;
+	}
 }
 /* 
  * floatFloat2Int - Return bit-level equivalent of expression (int) f
@@ -371,7 +382,39 @@ unsigned floatScale2(unsigned uf) {
  *   Rating: 4
  */
 int floatFloat2Int(unsigned uf) {
-  return 2;
+	unsigned exp = uf & 0x7f800000;
+	unsigned frac = uf & 0x007fffff;
+	int expint = exp >> 23 & 0x000000ff - 127;
+	if (exp & 0x7f800000){
+		return 0x80000000u;
+	}else if (!exp){
+		for (int i = 0; i < 127; i++){
+			frac >>= 1;
+			frac ^= 0x80000000;
+		}
+		return frac;
+	}else{
+		frac += 0x08000000;
+		if (expint < 0){
+			return 0;
+		}else if (expint == 0){
+			return 0;
+		}else{
+			int j = 23;
+			for (int i = 0; i < expint; i++){
+				frac <<= 1;
+				if (j){
+					frac >>= 1;
+					j--;
+				}
+			}
+			while(j){
+				frac >>= 1;
+				return frac;
+			}
+		}
+	}
+	
 }
 /* 
  * floatPower2 - Return bit-level equivalent of the expression 2.0^x
