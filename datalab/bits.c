@@ -384,37 +384,28 @@ unsigned floatScale2(unsigned uf) {
 int floatFloat2Int(unsigned uf) {
 	unsigned exp = uf & 0x7f800000;
 	unsigned frac = uf & 0x007fffff;
-	int expint = exp >> 23 & 0x000000ff - 127;
-	if (exp & 0x7f800000){
+	int sign = 0;
+	int ans;
+	if (uf & 0x80000000)sign = 1;
+	int expint = (exp >> 23) - 127;
+
+	if (expint > 31 || (expint == 31 && !frac)){
 		return 0x80000000u;
-	}else if (!exp){
-		for (int i = 0; i < 127; i++){
-			frac >>= 1;
-			frac ^= 0x80000000;
-		}
-		return frac;
-	}else{
-		frac += 0x08000000;
-		if (expint < 0){
-			return 0;
-		}else if (expint == 0){
-			return 0;
-		}else{
-			int j = 23;
-			for (int i = 0; i < expint; i++){
-				frac <<= 1;
-				if (j){
-					frac >>= 1;
-					j--;
-				}
-			}
-			while(j){
-				frac >>= 1;
-				return frac;
-			}
-		}
+	}else if (expint < 0){
+		return 0;	
 	}
-	
+
+	frac  = frac | 0x00800000;
+	if (expint > 23){
+		frac <<= (expint - 23);	
+	}else{
+		frac >>= (23 - expint);
+	}
+	ans = frac;
+	if (sign){
+		ans = -ans;
+	}
+	return	ans;
 }
 /* 
  * floatPower2 - Return bit-level equivalent of the expression 2.0^x
@@ -430,5 +421,11 @@ int floatFloat2Int(unsigned uf) {
  *   Rating: 4
  */
 unsigned floatPower2(int x) {
-    return 2;
+  unsigned INF = 0x7f800000;
+  int exp = x + 127;
+  if (exp < 0)
+    return 0;
+  if (exp >= 255)
+    return INF;
+  return exp << 23;
 }
