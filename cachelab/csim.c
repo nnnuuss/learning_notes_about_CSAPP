@@ -36,7 +36,7 @@ void init_cache(){
 		c[i]=(cache_set)malloc(sizeof(cache_line)*E);
 		for (int j = 0; j < E; ++j){
 			c[i][j].LRU_counter=c[i][j].valid_bit=0;
-			c[i][j].tag=-1;
+			c[i][j].tag=-1;		//有部分数据的tag位为0，所以需要初始化成-1
 		}
 	}
 }
@@ -59,7 +59,7 @@ void update(unsigned int address){
 	for (int i = 0; i < E; ++i){
 		if (c[setindex][i].tag==tar_tag){
 			c[setindex][i].LRU_counter=0;
-			hit_count++;
+			hit_count++;		//匹配
 			return;
 		}
 	}

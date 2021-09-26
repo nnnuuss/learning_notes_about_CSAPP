@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Sep 25 19:45:38 2021
+# Make data base, printed on Sun Sep 26 16:24:58 2021
 
 # Variables
 
@@ -57,7 +57,7 @@ LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 VSCODE_CWD = /root
 # environment
-SSH_CONNECTION = 171.43.199.8 29152 172.19.57.235 22
+SSH_CONNECTION = 171.43.199.8 27151 172.19.57.235 22
 # environment
 PATH = /root/.vscode-server/bin/7f6ab5485bbc008386c4386d08766667e155244e/bin:/root/.vscode-server/bin/7f6ab5485bbc008386c4386d08766667e155244e/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 # environment
@@ -65,7 +65,7 @@ XDG_RUNTIME_DIR = /run/user/0
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/0/vscode-ipc-81bda0bf-3d4b-4758-ba75-92bd78434322.sock
+VSCODE_IPC_HOOK_CLI = /run/user/0/vscode-ipc-41a551eb-5948-4a10-87e0-f1cdd86dfd75.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -107,7 +107,7 @@ SHLVL = 0
 # makefile (from 'Makefile', line 5)
 CC = gcc
 # environment
-XDG_SESSION_ID = 20613
+XDG_SESSION_ID = 20735
 # environment
 USER = root
 # makefile
@@ -125,7 +125,7 @@ MAKEFLAGS = pqrR
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_CLIENT = 171.43.199.8 29152 22
+SSH_CLIENT = 171.43.199.8 27151 22
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
@@ -163,9 +163,9 @@ MOTD_SHOWN = pam
 
 # Directories
 
-# . (device 64513, inode 1321802): 16 files, no impossibilities.
+# . (device 64513, inode 1321802): 25 files, no impossibilities.
 
-# 16 files, no impossibilities in 1 directories.
+# 25 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -207,28 +207,9 @@ Makefile:
 
 csim: csim.c cachelab.c cachelab.h
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  Last modified 2021-09-24 18:48:07.782012015
+#  Last modified 2021-09-26 16:07:48.178526876
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := csim
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := csim.c cachelab.c cachelab.h
-# automatic
-# | := 
-# automatic
-# < := csim.c
-# automatic
-# ^ := csim.c cachelab.c cachelab.h
-# automatic
-# ? := csim.c cachelab.c
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 13):
 	$(CC) $(CFLAGS) -o csim csim.c cachelab.c -lm 
 
@@ -241,8 +222,11 @@ tracegen: tracegen.c trans.o cachelab.c
 
 test-trans: test-trans.c trans.o cachelab.c cachelab.h
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Last modified 2021-09-26 16:07:48.518540718
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 #  recipe to execute (from 'Makefile', line 16):
 	$(CC) $(CFLAGS) -o test-trans test-trans.c cachelab.c trans.o 
 
@@ -254,8 +238,28 @@ test-trans: test-trans.c trans.o cachelab.c cachelab.h
 
 trans.o: trans.c
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit/static pattern stem: ''
+#  Last modified 2021-09-26 16:07:48.266530458
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := trans.o
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := trans.c
+# automatic
+# | := 
+# automatic
+# < := trans.c
+# automatic
+# ^ := trans.c
+# automatic
+# ? := trans.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
 #  recipe to execute (from 'Makefile', line 22):
 	$(CC) $(CFLAGS) -O0 -c trans.c
 
@@ -274,11 +278,11 @@ clean:
 # Not a target:
 csim.c:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-25 19:45:37.51589637
+ 
+#  Last modified 2021-09-26 11:18:38.224084671
 #  File has been updated.
 #  Successfully updated.
 
- 
 # Not a target:
 tracegen.c:
 #  Implicit rule search has not been done.
@@ -287,15 +291,17 @@ tracegen.c:
 
 # Not a target:
 test-trans.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2013-01-22 23:52:27
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 trans.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-26 16:10:08.868254591
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 cachelab.c:
@@ -312,12 +318,12 @@ cachelab.c:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 25 / storage = 220 B / avg = 8 B
-# current buf: size = 8162 B / used = 220 B / count = 25 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 31 / storage = 286 B / avg = 9 B
+# current buf: size = 8162 B / used = 286 B / count = 31 / avg = 9 B
 
-# strcache performance: lookups = 52 / hit rate = 51%
+# strcache performance: lookups = 61 / hit rate = 49%
 # hash-table stats:
-# Load=25/8192=0%, Rehash=0, Collisions=1/52=2%
-# Finished Make data base on Sat Sep 25 19:45:38 2021
+# Load=31/8192=0%, Rehash=0, Collisions=1/61=2%
+# Finished Make data base on Sun Sep 26 16:24:58 2021
 
  
